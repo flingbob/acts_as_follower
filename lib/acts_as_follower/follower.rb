@@ -42,12 +42,12 @@ module ActsAsFollower #:nodoc:
 
       # Returns the follow records related to this instance by type.
       def follows_by_type(followable_type, options={})
-        self.follows.unblocked.includes(:followable).for_followable_type(followable_type).all(options)
+        self.follows.unblocked.includes(:followable).for_followable_type(followable_type).load
       end
 
       # Returns the follow records related to this instance with the followable included.
       def all_follows(options={})
-        self.follows.unblocked.includes(:followable).all(options)
+        self.follows.unblocked.includes(:followable).load
       end
 
       # Returns the actual records which this instance is following.

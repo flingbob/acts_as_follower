@@ -25,8 +25,8 @@ module ActsAsFollower #:nodoc:
         follows = follower_type.constantize.
           joins(:follows).
           where('follows.blocked'         => false,
-                'follows.followable_id'   => self.id, 
-                'follows.followable_type' => parent_class_name(self), 
+                'follows.followable_id'   => self.id,
+                'follows.followable_type' => parent_class_name(self),
                 'follows.follower_type'   => follower_type)
         if options.has_key?(:limit)
           follows = follows.limit(options[:limit])
@@ -61,11 +61,11 @@ module ActsAsFollower #:nodoc:
 
       # Returns the following records.
       def followers(options={})
-        self.followings.unblocked.includes(:follower).all(options).collect{|f| f.follower}
+        self.followings.unblocked.includes(:follower).collect{|f| f.follower}
       end
 
       def blocks(options={})
-        self.followings.blocked.includes(:follower).all(options).collect{|f| f.follower}
+        self.followings.blocked.includes(:follower).collect{|f| f.follower}
       end
 
       # Returns true if the current instance is followed by the passed record
